@@ -18,10 +18,10 @@ while len(guessed_states) < 50:
         prompt="what's another state's name",
     )
 
-    if answer_state is None:
-        break
-
     answer_state = answer_state.title()
+
+    if answer_state == "Exit":
+        break
 
     # check for correct guess
 
@@ -33,5 +33,3 @@ while len(guessed_states) < 50:
         state_data = data[data.state == answer_state]
         t.goto(state_data.x.item(), state_data.y.item())
         t.write(state_data.state.item())
-
-screen.exitonclick()
