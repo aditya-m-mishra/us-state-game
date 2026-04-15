@@ -21,11 +21,17 @@ while len(guessed_states) < 50:
     answer_state = answer_state.title()
 
     if answer_state == "Exit":
+        missing_states = []
+        for state in all_states:
+            if state not in guessed_states:
+                missing_states.append(state)
+        new_data = pandas.DataFrame(missing_states)
+        new_data.to_csv("states_to_learn.csv")
         break
 
     # check for correct guess
 
-    if answer_state in all_states:
+    if answer_state in all_states and answer_state not in guessed_states:
         guessed_states.append(answer_state)
         t = turtle.Turtle()
         t.hideturtle()
